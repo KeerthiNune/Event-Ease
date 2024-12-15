@@ -74,7 +74,7 @@ const StudentRequestForm = () => {
                });
 
                if (response.data.success) {
-                    navigate("/student-dashboard/requests")
+                    navigate(`/student-dashboard/requests/${user._id}`)
             }
            } catch (error) {
                if (error.response && error.response.data && !error.response.data.success) {

@@ -1,12 +1,11 @@
 import Leaves from "../models/Request.js"
 import Student from "../models/Student.js"
-const addRequest = async (req,res) => {
 
+
+const addRequest = async (req,res) => {
     try{
         const {userId,fromDate,toDate,purpose,students} = req.body
-        
         console.log(userId,fromDate,toDate,purpose,students)
-
         const newRequest = new Leaves({
             userId,
             fromDate,
@@ -17,7 +16,6 @@ const addRequest = async (req,res) => {
         console.log(newRequest)
         await newRequest.save()
         return res.status(200).json({success:true})
-
     }catch(error){
         console.log(error.message)
         return res.status(500).json({success:false, error: `Request add server error${error}`})
@@ -28,12 +26,12 @@ const addRequest = async (req,res) => {
 const getRequest = async (req,res) => {
     try{
         const {id} = req.params;
-    const requests = await Leaves.findOne({userId:id})
-        console.log("requests",requests)
+    let requests = await Leaves.find({userId:id})
+        console.log(id)
         if(!requests){
-            const student = await Student.findOne({userId: id})
-            console.log(student)
-            requests = await Leaves.find({regNo:student._id})
+            const student = await Student.findOne({_id: id})
+            requests = await Leaves.find({userId:student._id})
+            console.log(requests)
         }
         return res.status(200).json({success:true,requests})
     }catch(error){

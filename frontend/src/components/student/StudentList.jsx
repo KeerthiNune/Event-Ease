@@ -15,7 +15,7 @@ const StudentList = () =>{
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert('Please log in to view departments.');
-                    setDepLoading(false);
+                    setStuLoading(false);
                     return;
                 }
 

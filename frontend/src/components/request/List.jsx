@@ -17,7 +17,7 @@ const List = () => {
             })
             console.log(response.data)
             if(response.data.success){
-                setRequests([response.data.requests])
+                setRequests(response.data.requests)
             }
         }catch(error){
             if(error.response && !error.response.data.success){
